@@ -1,0 +1,392 @@
+
+R version 3.2.2 (2015-08-14) -- "Fire Safety"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: i386-w64-mingw32/i386 (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> library(shiny)
+Warning message:
+package 'shiny' was built under R version 3.2.3 
+> 
+> runApp("C:\\Users\\Sili Fan\\Desktop\\WORK\\WCMC\\tools\\DeviumWeb", port=4444) # work
+Loading required package: plotly
+Loading required package: ggplot2
+Warning: package 'ggplot2' was built under R version 3.2.3
+
+Attaching package: 'plotly'
+
+The following object is masked from 'package:ggplot2':
+
+    last_plot
+
+The following object is masked from 'package:graphics':
+
+    layout
+
+Loading required package: knitr
+Loading required package: Hmisc
+Loading required package: lattice
+Loading required package: survival
+Loading required package: Formula
+
+Attaching package: 'Hmisc'
+
+The following object is masked from 'package:plotly':
+
+    subplot
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+Loading required package: car
+Note: the specification for S3 class "family" in package 'MatrixModels' seems equivalent to one from package 'lme4': not turning on duplicate class definitions for this class.
+Loading required package: tools
+Loading required package: gridExtra
+Loading required package: markdown
+Loading required package: R.utils
+Loading required package: R.oo
+Loading required package: R.methodsS3
+R.methodsS3 v1.7.0 (2015-02-19) successfully loaded. See ?R.methodsS3 for help.
+R.oo v1.19.0 (2015-02-27) successfully loaded. See ?R.oo for help.
+
+Attaching package: 'R.oo'
+
+The following object is masked _by_ '.GlobalEnv':
+
+    trim
+
+The following object is masked from 'package:shiny':
+
+    printStackTrace
+
+The following objects are masked from 'package:methods':
+
+    getClasses, getMethods
+
+The following objects are masked from 'package:base':
+
+    attach, detach, gc, load, save
+
+R.utils v2.2.0 (2015-12-09) successfully loaded. See ?R.utils for help.
+
+Attaching package: 'R.utils'
+
+The following object is masked from 'package:Hmisc':
+
+    capitalize
+
+The following objects are masked from 'package:shiny':
+
+    setProgress, validate
+
+The following object is masked from 'package:utils':
+
+    timestamp
+
+The following objects are masked from 'package:base':
+
+    cat, commandArgs, getOption, inherits, isOpen, parse, warnings
+
+Loading required package: psych
+
+Attaching package: 'psych'
+
+The following object is masked _by_ '.GlobalEnv':
+
+    rescale
+
+The following object is masked from 'package:car':
+
+    logit
+
+The following object is masked from 'package:Hmisc':
+
+    describe
+
+The following objects are masked from 'package:ggplot2':
+
+    %+%, alpha
+
+Loading required package: rela
+Loading required package: plyr
+
+Attaching package: 'plyr'
+
+The following objects are masked _by_ '.GlobalEnv':
+
+    ., rename
+
+The following objects are masked from 'package:Hmisc':
+
+    is.discrete, summarize
+
+Loading required package: reshape2
+Loading required package: vegan
+Loading required package: permute
+
+Attaching package: 'permute'
+
+The following object is masked from 'package:R.oo':
+
+    check
+
+This is vegan 2.3-3
+Loading required package: lubridate
+
+Attaching package: 'lubridate'
+
+The following object is masked from 'package:plyr':
+
+    here
+
+Loading required package: pander
+
+Attaching package: 'pander'
+
+The following object is masked from 'package:R.utils':
+
+    wrap
+
+The following object is masked from 'package:shiny':
+
+    p
+
+Loading required package: wordcloud
+Loading required package: RColorBrewer
+Loading required package: impute
+Loading required package: WGCNA
+Loading required package: dynamicTreeCut
+Loading required package: fastcluster
+
+Attaching package: 'fastcluster'
+
+The following object is masked from 'package:stats':
+
+    hclust
+
+Note: the specification for S3 class "AsIs" in package 'BiocGenerics' seems equivalent to one from package 'jsonlite': not turning on duplicate class definitions for this class.
+Loading required package: DBI
+
+==========================================================================
+*
+*  Package WGCNA 1.49 loaded.
+*
+*    Important note: It appears that your system supports multi-threading,
+*    but it is not enabled within WGCNA in R. 
+*    To allow multi-threading within WGCNA with all available cores, use 
+*
+*          allowWGCNAThreads()
+*
+*    within R. Use disableWGCNAThreads() to disable threading if necessary.
+*    Alternatively, set the following environment variable on your system:
+*
+*          ALLOW_WGCNA_THREADS=<number_of_processors>
+*
+*    for example 
+*
+*          ALLOW_WGCNA_THREADS=8
+*
+*    To set the environment variable in linux bash shell, type 
+*
+*           export ALLOW_WGCNA_THREADS=8
+*
+*     before running R. Other operating systems or shells will
+*     have a similar command to achieve the same aim.
+*
+==========================================================================
+
+
+
+Attaching package: 'WGCNA'
+
+The following object is masked from 'package:stats':
+
+    cor
+
+Loading required package: RJSONIO
+Note: the specification for S3 class "AsIs" in package 'RJSONIO' seems equivalent to one from package 'jsonlite': not turning on duplicate class definitions for this class.
+Loading required package: pwr
+Loading required package: AER
+Loading required package: lmtest
+Loading required package: zoo
+
+Attaching package: 'zoo'
+
+The following objects are masked from 'package:base':
+
+    as.Date, as.Date.numeric
+
+
+Attaching package: 'lmtest'
+
+The following object is masked from 'package:R.utils':
+
+    reset
+
+Loading required package: sandwich
+Loading required package: Ecdat
+Loading required package: Ecfun
+
+Attaching package: 'Ecdat'
+
+The following object is masked from 'package:car':
+
+    Mroz
+
+The following object is masked from 'package:datasets':
+
+    Orange
+
+Loading required package: foreign
+Loading required package: xts
+Loading required package: fdrtool
+Loading required package: pls
+
+Attaching package: 'pls'
+
+The following object is masked from 'package:vegan':
+
+    scores
+
+The following object is masked from 'package:stats':
+
+    loadings
+
+Loading required package: qvalue
+
+Attaching package: 'qvalue'
+
+The following object is masked from 'package:WGCNA':
+
+    qvalue
+
+Loading required package: pcaMethods
+Loading required package: Biobase
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: 'BiocGenerics'
+
+The following objects are masked from 'package:parallel':
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from 'package:lubridate':
+
+    intersect, setdiff, union
+
+The following object is masked from 'package:Hmisc':
+
+    combine
+
+The following objects are masked from 'package:stats':
+
+    IQR, mad, xtabs
+
+The following objects are masked from 'package:base':
+
+    anyDuplicated, append, as.data.frame, as.vector, cbind, colnames,
+    do.call, duplicated, eval, evalq, Filter, Find, get, grep, grepl,
+    intersect, is.unsorted, lapply, lengths, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unlist, unsplit
+
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+
+Attaching package: 'Biobase'
+
+The following object is masked from 'package:Hmisc':
+
+    contents
+
+
+Attaching package: 'pcaMethods'
+
+The following objects are masked from 'package:pls':
+
+    loadings, scores
+
+The following object is masked from 'package:vegan':
+
+    scores
+
+The following object is masked from 'package:stats':
+
+    loadings
+
+Loading required package: hexbin
+Loading required package: shinyBS
+Loading required package: httr
+
+Attaching package: 'httr'
+
+The following object is masked from 'package:Biobase':
+
+    content
+
+The following object is masked from 'package:plotly':
+
+    config
+
+Loading required package: jsonlite
+
+Attaching package: 'jsonlite'
+
+The following objects are masked from 'package:RJSONIO':
+
+    fromJSON, toJSON
+
+The following object is masked from 'package:R.utils':
+
+    validate
+
+The following object is masked from 'package:shiny':
+
+    validate
+
+Loading required package: Rcpp
+Loading required package: shinybootstrap2
+You probably do not want to attach this package (with library() or require()). Instead, you should use shinybootstrap2::withBootstrap2(). You can hide this message with suppressPackageStartupMessages().
+
+Attaching package: 'shinybootstrap2'
+
+The following objects are masked from 'package:shiny':
+
+    animationOptions, basicPage, bootstrapPage, checkboxGroupInput,
+    checkboxInput, column, dataTableOutput, dateInput, dateRangeInput,
+    fixedPage, fixedRow, fluidPage, fluidRow, headerPanel, icon,
+    mainPanel, navbarPage, navlistPanel, numericInput, pageWithSidebar,
+    radioButtons, selectInput, selectizeInput, sidebarLayout,
+    sidebarPanel, sliderInput, submitButton, textInput, titlePanel,
+    updateCheckboxGroupInput, updateRadioButtons, updateSliderInput,
+    verticalLayout
+
+
+Listening on http://127.0.0.1:4444
+Error in startServer(host, port, handlerManager$createHttpuvApp()) : 
+  Failed to create server
+Calls: runApp -> startApp -> startServer
+Execution halted
