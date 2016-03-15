@@ -280,11 +280,16 @@ aov.formula.list<-function(data,formula,meta.data=factor,post.hoc=TRUE,repeated=
     #get p-values
     if(!is.null(repeated)){
       names<-attr(model$`(Intercept)`$terms,'term.labels')
-      p.values<-data.frame(((summary(model)[[1]])[[1]])[1,5],
-                           ((summary(model)[[2]])[[1]])[1,5],
-                           ((summary(model)[[2]])[[1]])[2,5])
-      # p.values<-data.frame(t(summary(model[[3]])[[1]][1:(length(names)),5,drop=FALSE]))
-      dimnames(p.values)<-list(colnames(data)[i],names)
+      if(ncol(meta.data)>1){
+        p.values<-data.frame(((summary(model)[[1]])[[1]])[1,5],
+                             ((summary(model)[[2]])[[1]])[1,5],
+                             ((summary(model)[[2]])[[1]])[2,5])
+        # p.values<-data.frame(t(summary(model[[3]])[[1]][1:(length(names)),5,drop=FALSE]))
+        dimnames(p.values)<-list(colnames(data)[i],names)
+      }else{
+        p.values <- data.frame(summary(model)[[2]][[1]][1,5])
+        dimnames(p.values)<-list(colnames(data)[i],names)
+      }
     } else {
       names<-attr(model$terms,'term.labels')
       p.values<-data.frame(t(summary(model)[[1]][1:length(names),5,drop=FALSE]))
@@ -799,63 +804,63 @@ data<-data[,-c(1:4)]
 
 aov.formula.list(data,formula,meta.data=factor[,1:2],post.hoc,repeated,p.adjust="BH")
 
-aov.formula.list<-function(data,formula,meta.data=factor,post.hoc=TRUE,repeated=NULL,p.adjust="BH"){
-	#formula = formula excluding repeated terms
-	#meta data  = all factors
-	#repeated name of factor for repeated measures
-
-	 if(!is.null(repeated)) {
-		formula<-paste0(formula,'+ Error(',repeated,')')
-	  }	
-	  
-	  tmp.data<-cbind(meta.data,data) # bind with data for easy scoping
-	  results<-list(p.value=vector("list",ncol(data)),post.hoc=vector("list",ncol(data)))
-	  for(i in 1:ncol(data)){
-			model<-tryCatch(aov(as.formula(paste("data[,",i,"]~",formula,sep="")),data=tmp.data), error=function(e){NULL})
-			#get p-values
-			if(!is.null(repeated)){
-				names<-attr(model$Within$terms,'term.labels')
-				p.values<-data.frame(t(summary(model$Within)[[1]][1:length(names),5,drop=FALSE]))
-				dimnames(p.values)<-list(colnames(data)[i],names)
-			} else {
-				names<-attr(model$terms,'term.labels')
-				p.values<-data.frame(t(summary(model)[[1]][1:length(names),5,drop=FALSE]))
-				dimnames(p.values)<-list(colnames(data)[i],names)
-			}
-			#pairwise t-tests (repeated) or TukeyHSD
-			if(post.hoc){
-				if(!is.null(repeated)){
-					tmp<-meta.data[,!colnames(meta.data)%in%repeated]
-					tmp.m<-cbind(tmp,join.columns(tmp,":"))
-					post.h<-do.call("cbind",lapply(1:ncol(tmp.m),function(j){
-						obj<-t(pairwise.t.test(data[,i], tmp.m[,j],p.adjust.method=p.adjust)$p.value)
-						diag <- if(ncol(obj)==1) TRUE else FALSE
-						names<-matrix(apply(expand.grid(rownames(obj),colnames(obj)),1,paste,collapse="-"),nrow(obj),ncol(obj))
-						obj2<-data.frame(matrix(obj[upper.tri(obj,diag=diag)],1))
-						colnames(obj2)<-names[upper.tri(names,diag=diag)]
-						rownames(obj2)<-colnames(data)[i]	
-						obj2
-					}))
-				} else {
-					tmp2<-tryCatch(TukeyHSD(model),error=function(e){NA})
-					post.h<-do.call("cbind",lapply(1:length(tmp2),function(j){
-						obj<-t(tmp2[[j]][,4,drop=FALSE])
-						rownames(obj)<-colnames(data)[i]
-						obj	
-					}))
-				}
-			
-			} else {
-				post.h<-NULL
-			}
-			
-			results$p.value[[i]]<-p.values
-			results$post.hoc[[i]]<-post.h
-			
-		}	
-			return(list(p.values=do.call("rbind",results$p.value),post.hoc=do.call("rbind",results$post.hoc)))
-			
-}
+# aov.formula.list<-function(data,formula,meta.data=factor,post.hoc=TRUE,repeated=NULL,p.adjust="BH"){
+# 	#formula = formula excluding repeated terms
+# 	#meta data  = all factors
+# 	#repeated name of factor for repeated measures
+# 
+# 	 if(!is.null(repeated)) {
+# 		formula<-paste0(formula,'+ Error(',repeated,')')
+# 	  }	
+# 	  
+# 	  tmp.data<-cbind(meta.data,data) # bind with data for easy scoping
+# 	  results<-list(p.value=vector("list",ncol(data)),post.hoc=vector("list",ncol(data)))
+# 	  for(i in 1:ncol(data)){
+# 			model<-tryCatch(aov(as.formula(paste("data[,",i,"]~",formula,sep="")),data=tmp.data), error=function(e){NULL})
+# 			#get p-values
+# 			if(!is.null(repeated)){
+# 				names<-attr(model$Within$terms,'term.labels')
+# 				p.values<-data.frame(t(summary(model$Within)[[1]][1:length(names),5,drop=FALSE]))
+# 				dimnames(p.values)<-list(colnames(data)[i],names)
+# 			} else {
+# 				names<-attr(model$terms,'term.labels')
+# 				p.values<-data.frame(t(summary(model)[[1]][1:length(names),5,drop=FALSE]))
+# 				dimnames(p.values)<-list(colnames(data)[i],names)
+# 			}
+# 			#pairwise t-tests (repeated) or TukeyHSD
+# 			if(post.hoc){
+# 				if(!is.null(repeated)){
+# 					tmp<-meta.data[,!colnames(meta.data)%in%repeated]
+# 					tmp.m<-cbind(tmp,join.columns(tmp,":"))
+# 					post.h<-do.call("cbind",lapply(1:ncol(tmp.m),function(j){
+# 						obj<-t(pairwise.t.test(data[,i], tmp.m[,j],p.adjust.method=p.adjust)$p.value)
+# 						diag <- if(ncol(obj)==1) TRUE else FALSE
+# 						names<-matrix(apply(expand.grid(rownames(obj),colnames(obj)),1,paste,collapse="-"),nrow(obj),ncol(obj))
+# 						obj2<-data.frame(matrix(obj[upper.tri(obj,diag=diag)],1))
+# 						colnames(obj2)<-names[upper.tri(names,diag=diag)]
+# 						rownames(obj2)<-colnames(data)[i]	
+# 						obj2
+# 					}))
+# 				} else {
+# 					tmp2<-tryCatch(TukeyHSD(model),error=function(e){NA})
+# 					post.h<-do.call("cbind",lapply(1:length(tmp2),function(j){
+# 						obj<-t(tmp2[[j]][,4,drop=FALSE])
+# 						rownames(obj)<-colnames(data)[i]
+# 						obj	
+# 					}))
+# 				}
+# 			
+# 			} else {
+# 				post.h<-NULL
+# 			}
+# 			
+# 			results$p.value[[i]]<-p.values
+# 			results$post.hoc[[i]]<-post.h
+# 			
+# 		}	
+# 			return(list(p.values=do.call("rbind",results$p.value),post.hoc=do.call("rbind",results$post.hoc)))
+# 			
+# }!!!!
 
 
 }
