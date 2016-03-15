@@ -280,8 +280,10 @@ aov.formula.list<-function(data,formula,meta.data=factor,post.hoc=TRUE,repeated=
     #get p-values
     if(!is.null(repeated)){
       names<-attr(model$`(Intercept)`$terms,'term.labels')
-      
-      p.values<-data.frame(t(summary(model[[3]])[[1]][1:length(names),5,drop=FALSE]))
+      p.values<-data.frame(((summary(model)[[1]])[[1]])[1,5],
+                           ((summary(model)[[2]])[[1]])[1,5],
+                           ((summary(model)[[2]])[[1]])[2,5])
+      # p.values<-data.frame(t(summary(model[[3]])[[1]][1:(length(names)),5,drop=FALSE]))
       dimnames(p.values)<-list(colnames(data)[i],names)
     } else {
       names<-attr(model$terms,'term.labels')
